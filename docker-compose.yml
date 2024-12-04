@@ -1,0 +1,17 @@
+
+services:
+  react:
+    container_name: react
+    build:
+      context: ./frontend/react
+    volumes:
+      - ./frontend/react/react-cytoscape:/react-cytoscape
+      - react_static_volume:/build
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+    ports:
+      - 3000:3000
+volumes:
+  react_static_volume:
