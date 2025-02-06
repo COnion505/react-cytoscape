@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CytoscapeComponent from "react-cytoscapejs";
 
 enum LayoutOptions {
     Null = "null",
@@ -29,12 +28,9 @@ function CyCompo() {
 
 
     return (
-        <CytoscapeComponent
-        boxSelectionEnabled={true}
-        elements={elements}
-        style={{ backgroundColor: "whitesmoke", width: "600px", height: "600px" }}
-        layout={{name: LayoutOptions.Cose}}
-        />
+        <>
+            <p>CypCompo</p>
+        </>
     );
 }
 
