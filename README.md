@@ -4,7 +4,7 @@
 ```
 docker compose run --rm react npm install react-cytoscapejs
 docker compose run --rm react npm install cytoscape
- docker compose run --rm react npm install --save-dev @types/react-cytoscapejs
+docker compose run --rm react npm install --save-dev @types/react-cytoscapejs
 ```
 
 ```
