@@ -1,4 +1,5 @@
-import React from "react";
+import cytoscape from "cytoscape";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
 enum LayoutOptions {
@@ -26,11 +27,23 @@ function CyCompo() {
             { data: { source: "two", target: "five", label: "Edge from Node 2 to Node 5" } }
     ];
 
+    const cyEleRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const cyInstance = cytoscape({
+            container: cyEleRef.current,
+            elements: elements,
+            style: [],
+            layout: { name: LayoutOptions.Grid },
+        });
+
+        return () => {
+            cyInstance.destroy();
+        };
+    }, []);
 
     return (
-        <>
-            <p>CypCompo</p>
-        </>
+        <div ref={cyEleRef} style={{ width: "1000px", height: "1000px", background: "gray" }} />
     );
 }
 
