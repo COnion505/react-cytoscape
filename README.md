@@ -17,7 +17,7 @@ npm install @mui/icons-material
 docker compose up -d
 ```
 
-`localhost:3000`
+`http://localhost:3000`
 
 - [x] up -d
 - [x] hot reload
