@@ -1,6 +1,8 @@
 import cytoscape from "cytoscape";
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useState } from "react";
 
 enum LayoutOptions {
     Null = "null",
@@ -29,8 +31,8 @@ function CyCompo() {
 
     const cyEleRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const cyInstance = cytoscape({
+        useEffect(() => {
+            const cyInstance = cytoscape({
             container: cyEleRef.current,
             elements: elements,
             style: [],
@@ -43,7 +45,7 @@ function CyCompo() {
     }, []);
 
     return (
-        <div ref={cyEleRef} style={{ width: "1000px", height: "1000px", background: "gray" }} />
+        <div ref={cyEleRef} style={{ width: "100%", height: "100%", background: "gray" }} />
     );
 }
 
