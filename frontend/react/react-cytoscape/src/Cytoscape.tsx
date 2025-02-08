@@ -1,7 +1,5 @@
 import cytoscape from "cytoscape";
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 
 enum LayoutOptions {
@@ -16,6 +14,7 @@ enum LayoutOptions {
 }
 
 function CyCompo() {
+    const [layout, setLayout] = useState(LayoutOptions.Null);
     const elements = [
             { data: { id: "parent" } },
             { data: { id: "one", label: "Node 1", parent: "parent" }, position: { x: 0, y: 0 } },
@@ -31,21 +30,42 @@ function CyCompo() {
 
     const cyEleRef = useRef<HTMLDivElement>(null);
 
-        useEffect(() => {
-            const cyInstance = cytoscape({
+    useEffect(() => {
+        const cyInstance = cytoscape({
             container: cyEleRef.current,
             elements: elements,
             style: [],
-            layout: { name: LayoutOptions.Grid },
+            layout: {
+                name: layout,
+            },
+            boxSelectionEnabled: true,
+            wheelSensitivity: 0.3,
         });
 
         return () => {
             cyInstance.destroy();
         };
-    }, []);
+    }, [layout]);
 
     return (
-        <div ref={cyEleRef} style={{ width: "100%", height: "100%", background: "gray" }} />
+        <>
+            <select
+                value={layout}
+                onChange={(e) => setLayout(e.target.value as LayoutOptions)}
+            >
+                <option value={LayoutOptions.Null}>Null</option>
+                <option value={LayoutOptions.Random}>Random</option>
+                <option value={LayoutOptions.Preset}>Preset</option>
+                <option value={LayoutOptions.Grid}>Grid</option>
+                <option value={LayoutOptions.Circle}>Circle</option>
+                <option value={LayoutOptions.Concentric}>Concentric</option>
+                <option value={LayoutOptions.Breadthfirst}>Breadthfirst</option>
+                <option value={LayoutOptions.Cose}>Cose</option>
+            </select>
+
+            <div ref={cyEleRef} style={{ width: "100%", height: "100%", background: "gray" }} />
+        </>
+
     );
 }
 
